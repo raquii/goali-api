@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-  resources :logs
-  resources :friend_requests
-  resources :friendships
-  resources :messages
-  resources :habits
-  resources :profiles
-  resources :users
+  post "/login", to: "sessions#create"
+  get "/user", to: "users#show"
+  delete "/logout", to: "sessions#destroy"
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
