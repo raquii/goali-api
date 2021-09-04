@@ -1,6 +1,9 @@
 class User < ApplicationRecord
     has_secure_password
 
+    scope :filter_by_name, -> (name){ where("name like ?", "#{name}%")}
+    scope :filter_by_username, -> (username){ where("username like ?", "#{username}%")}
+
     #relationship macros
     has_one :profile, dependent: :destroy
 
@@ -16,6 +19,8 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true
     validates :username, presence: true, length: {in: 5..30}, uniqueness: {message: "%{value} is already taken!"}, format: {with: /\A[a-zA-Z\d_]+\z/, message: "letters, numbers, and underscores only."}
-    validates :password, presence: true, format:{ with: %r{\A.*(?=.{7,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*\z}}, confirmation: true 
+    validates :password, presence: true, format:{ with: %r{\A.*(?=.{7,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=]).*\z}}, confirmation: true 
     validates_date :birthday, on_or_before: lambda { 13.years.ago }, before_message: "must be at least 13 years old"
+
+   
 end
