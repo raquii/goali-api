@@ -13,7 +13,7 @@ class UsersController < ApplicationController
         if @current_user.valid?
             create_profile
             session[:user_id] = @current_user.id
-            render json: user, status: :created
+            render json: @current_user, status: :created
         end
     end
 
