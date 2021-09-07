@@ -22,5 +22,7 @@ class User < ApplicationRecord
     validates :password, presence: true, format:{ with: %r{\A.*(?=.{7,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=]).*\z}}, confirmation: true 
     validates_date :birthday, on_or_before: lambda { 13.years.ago }, before_message: "must be at least 13 years old"
 
-   
+   def friends
+        self.friendships_as_friend_a + self.friendships_as_friend_b
+   end
 end
