@@ -22,7 +22,31 @@ class User < ApplicationRecord
     validates :password, presence: true, format:{ with: %r{\A.*(?=.{7,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=]).*\z}}, confirmation: true 
     validates_date :birthday, on_or_before: lambda { 13.years.ago }, before_message: "must be at least 13 years old"
 
-   def friends
-        self.friendships_as_friend_a + self.friendships_as_friend_b
+   def friendships
+      self.friendships_as_friend_a + self.friendships_as_friend_b
+   end
+
+   def get_friends
+      self.friendships.map do |friendship| 
+         friendship.friend_a_id == self.id ? User.find(friendship.friend_b_id) : User.find(friendship.friend_a_id)
+      end
+   end
+
+   def requests
+      self.friend_requests_as_requestor + self.friend_requests_as_receiver
+   end
+
+   def get_requests
+      self.requests.map do |request| 
+         request.requestor_id == self.id ? User.find(request.receiver_id) : User.find(request.requestor_id)
+      end
+   end
+
+   def get_friend(id)
+      self.get_friends.detect{|f| f.id == id}
+   end
+
+   def get_public_habits
+     self.habits.where(private: false)
    end
 end
