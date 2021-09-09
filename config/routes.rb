@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   get "/users", to: "users#index"
 
-  resources :friendships, only: [:create, :destroy]
-  resources :friend_requests, only: [:create, :destroy]
+  resources :friendships, except: [:update, :show]
+  resources :friend_requests, except: [:update, :show]
   resources :profiles, only: [:show, :update]
+  resources :habits, except: [:show]
+  resources :logs, only: [:create, :destroy]
   
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
