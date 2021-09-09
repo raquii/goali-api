@@ -5,7 +5,7 @@ class UsersController < ApplicationController
         users = User.all
         users = users.filter_by_name(params[:name]) if params[:name].present?
         users = users.filter_by_username(params[:username]) if params[:username].present?
-        render json: users
+        render json: users, only: [:id, :name, :username, :email], each_serializer: nil
     end
     
     def create
