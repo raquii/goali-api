@@ -1,4 +1,9 @@
 class FriendRequestsController < ApplicationController
+   
+    def index
+        requests = @current_user.get_requests
+        render json: requests, each_serializer: FriendRequestSerializer 
+    end
 
     def create
         request = FriendRequest.create!(friend_request_params)
