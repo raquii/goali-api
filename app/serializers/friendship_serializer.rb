@@ -19,5 +19,6 @@ class FriendshipSerializer < ActiveModel::Serializer
         logs: habit.get_logs
         }
       end
+    end
   end
 end
