@@ -2,7 +2,7 @@ class HabitsController < ApplicationController
 
     def index
         habits = @current_user.habits
-        render json: habits, methods: [:count_times_logged]
+        render json: habits, methods: [:total_times]
     end
 
     def show
@@ -23,14 +23,16 @@ class HabitsController < ApplicationController
 
     def destroy
         habit = find_habit
-        habit.destroy
-        head :no_content
+        if habit.user_id == @current_user.id
+            habit.destroy
+            render json: {message: "Successfully deleted."}
+        end
     end
 
     private
 
     def habit_params
-        params.permit(:name, :description, :icon, :periodicity, :goal, :private, :archived)
+        params.permit(:id, :name, :description, :icon, :periodicity, :goal, :private, :archived)
     end
 
     def find_habit

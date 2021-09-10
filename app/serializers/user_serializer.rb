@@ -16,7 +16,7 @@ class UserSerializer < ActiveModel::Serializer
       frequency: habit.goal,
       private_habit: habit.private,
       archived: habit.archived,
-      total_times: habit.count_times_logged,
+      total_times: habit.total_times,
       logs: habit.get_logs
       }
     end

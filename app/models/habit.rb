@@ -8,7 +8,7 @@ class Habit < ApplicationRecord
   validates :private, inclusion: [true, false]
   validates :archived, inclusion: [true, false]
   
-  def count_times_logged
+  def total_times
     self.logs.count
   end
 
