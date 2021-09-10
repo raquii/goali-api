@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_09_03_175620) do
 
   create_table "logs", force: :cascade do |t|
     t.bigint "habit_id", null: false
-    t.datetime "date"
+    t.date "date"
     t.index ["habit_id"], name: "index_logs_on_habit_id"
   end
 
