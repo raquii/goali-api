@@ -44,3 +44,5 @@ gem "bcrypt", "~> 3.1"
 gem 'validates_timeliness', '~> 6.0.0.alpha1'
 
 gem "active_model_serializers", "~> 0.10.6"
+
+gem "chronic", "~> 0.10.2"
