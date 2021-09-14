@@ -17,7 +17,7 @@ class FriendshipsController < ApplicationController
 
     def destroy
         Friendship.destroy_reciprocal_for_ids(@current_user.id, params[:friend_id])
-        head :no_content
+        render json: {message: "Friend removed"}
     end   
 
     private
