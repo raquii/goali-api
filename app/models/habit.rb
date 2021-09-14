@@ -8,6 +8,8 @@ class Habit < ApplicationRecord
   validates :private, inclusion: [true, false]
   validates :archived, inclusion: [true, false]
   
+  scope :public_active, -> { where(private:false, archived:false) }
+
   def total_times
     self.logs.count
   end
