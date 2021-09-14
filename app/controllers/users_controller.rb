@@ -5,7 +5,7 @@ class UsersController < ApplicationController
         users = User.all
         users = users.filter_by_name(params[:name]) if params[:name].present?
         users = users.filter_by_username(params[:username]) if params[:username].present?
-        render json: users, only: [:id, :name, :username, :email], each_serializer: nil
+        render json: users
     end
     
     def create
@@ -13,12 +13,12 @@ class UsersController < ApplicationController
         if @current_user.valid?
             create_profile
             session[:user_id] = @current_user.id
-            render json: @current_user, status: :created
+            render json: @current_user, status: :created, serializer: CurrentUserSerializer
         end
     end
 
     def show
-        render json: @current_user
+        render json: @current_user, serializer: CurrentUserSerializer
     end
 
     private
