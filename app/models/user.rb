@@ -18,7 +18,7 @@ class User < ApplicationRecord
     #validations
     validates :name, presence: true
     validates :email, presence: true
-    validates :username, presence: true, length: {in: 5..30}, uniqueness: {message: "%{value} is already taken!"}, format: {with: /\A[a-zA-Z\d_]+\z/, message: "letters, numbers, and underscores only."}
+    validates :username, presence: true, length: {in: 5..30}, uniqueness: {message: "%{value} is already taken!"}, format: {with: /\A[a-zA-Z._\d_]+\z/, message: "letters, numbers, and underscores only."}
     validates :password, presence: true, format:{ with: %r{\A.*(?=.{7,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=]).*\z}}, confirmation: true 
     validates_date :birthday, on_or_before: lambda { 13.years.ago }, before_message: "must be at least 13 years old"
 
@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
    def get_friends
       self.friendships.map do |friendship| 
-         friendship.friend_a_id == self.id ? User.find(friendship.friend_b_id) : User.find(friendship.friend_a_id)
+         friendship.friend_a_id == self.id ? {id: friendship.friend_b.id, name: friendship.friend_b.name, username: friendship.friend_b.username, habits: friendship.friend_b.habits.public_active, friendship_id: friendship.id } : {id: friendship.friend_a.id, name: friendship.friend_a.name, username: friendship.friend_a.username, habits: friendship.friend_a.habits.public_active, friendship_id: friendship.id }
       end
    end
 
@@ -38,7 +38,7 @@ class User < ApplicationRecord
 
    def get_requests
       self.requests.map do |request| 
-         request.requestor_id == self.id ? User.find(request.receiver_id) : User.find(request.requestor_id)
+         request.requestor_id == self.id ? {id: request.id, friend: request.receiver} : request.requestor
       end
    end
 
