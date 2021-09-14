@@ -25,5 +25,9 @@ class FriendRequest < ApplicationRecord
             self.errors.add(:requestor_id, "You've already sent a request.")
         end
     end
+
+    def self.find_request(user_1_id, user_2_id)
+        FriendRequest.find_by(requestor_id: user_1_id, receiver_id: user_2_id) || FriendRequest.find_by(requestor_id: user_2_id, receiver_id: user_1_id)
+    end
     
 end
