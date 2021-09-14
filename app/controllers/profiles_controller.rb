@@ -1,5 +1,4 @@
 class ProfilesController < ApplicationController
-    before_action :authorize_editor, only: :update
 
     def show
         profile = Profile.find_by(profile_params)
@@ -8,8 +7,10 @@ class ProfilesController < ApplicationController
 
     def update
         profile = Profile.find(params[:id])
-        profile.update!(profile_params)
-        render json: profile
+        if profile.user == @current_user
+            profile.update!(profile_params)
+            render json: profile
+        end
     end
 
     private
@@ -17,5 +18,6 @@ class ProfilesController < ApplicationController
     def profile_params
         params.permit(:location, :profile_picture, :bio)
     end
+
     
 end
