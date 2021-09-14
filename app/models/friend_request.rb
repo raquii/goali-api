@@ -9,7 +9,7 @@ class FriendRequest < ApplicationRecord
     validate :adding_self?
 
     def already_friends?
-        if Friendship.find_friendship(self.requestor_id, self.receiver_id)
+        if Friendship.find_by(user_id:self.requestor_id, friend_id:self.receiver_id)
             self.errors.add(:requestor_id, "You're already friends with this person!")
         end
     end
@@ -21,13 +21,9 @@ class FriendRequest < ApplicationRecord
     end
 
     def already_requested?
-        if FriendRequest.find_request(self.requestor_id, self.receiver_id)
+        if FriendRequest.find_by(requestor_id:self.requestor_id, receiver_id:self.receiver_id)
             self.errors.add(:requestor_id, "You've already sent a request.")
         end
-    end
-
-    def self.find_request(requestor_id, receiver_id)
-        FriendRequest.find_by(requestor_id: requestor_id, receiver_id: receiver_id)||FriendRequest.find_by(requestor_id: receiver_id, receiver_id: requestor_id)
     end
     
 end

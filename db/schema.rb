@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 2021_09_03_175620) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.bigint "friend_a_id"
-    t.bigint "friend_b_id"
-    t.index ["friend_a_id"], name: "index_friendships_on_friend_a_id"
-    t.index ["friend_b_id"], name: "index_friendships_on_friend_b_id"
+    t.bigint "user_id"
+    t.bigint "friend_id"
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "habits", force: :cascade do |t|
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_09_03_175620) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "friendships", "users"
   add_foreign_key "habits", "users"
   add_foreign_key "logs", "habits"
   add_foreign_key "messages", "habits"
