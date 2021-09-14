@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+u1= User.create(name:"Sandy Cremin" ,username: "Everett.Harber8", email:"Kristopher13@hotmail.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u2= User.create(name:"Clint Kihn", username: "Desmond.Pagac50", email:"Rylan_Greenfelder@gmail.com"  ,password:"Password12345!" , birthday:"6/5/2005" )
+u3= User.create(name:"William Konopelski", username: "Titus.McDermott", email:"Bret13@yahoo.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u4= User.create(name:"Julianne Corwin", username: "Julianne39", email:"Julianne39@yahoo.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u5= User.create(name:"Doug Friesen", username: "dougdougdoug", email:"Jude.Volkman@gmail.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u6= User.create(name:"Delia Turner", username: "turnaround", email:"Shanna_Weimann@hotmail.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u7= User.create(name:"Pablo Shields", username: "ShhItsPablo", email:"notpablo@gmail.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u8= User.create(name:"Lela Walter", username: "Maxime.Stracke47", email:"Maxime.Stracke47@yahoo.com" , password:"Password12345!" , birthday:"6/5/2005" )
+u9= User.create(name:"Neal Koss", username: "KossISaidSo", email:"Terrill87@yahoo.com", password:"Password12345!" , birthday:"6/5/2005" )
+u10= User.create(name:"Karla Kirlin", username: "Celestine67", email:"Hertha_OReilly71@hotmail.com", password:"Password12345!" , birthday:"6/5/2005" )
+
+Profile.create(user: u1, location:"Leonorville" , bio:"Vel perspiciatis assumenda nostrum et adipisci et earum praesentium reiciendis." , profile_picture:"" )
+Profile.create(user: u2, location:"Meganemouth" , bio:"Non voluptatem illum quo iste." , profile_picture:"" )
+Profile.create(user: u3, location:"Hettingerland" , bio:"Dolor quod doloribus et." , profile_picture:"" )
+Profile.create(user: u4, location:"East Darleneton" , bio:"In aut molestiae ad maxime." , profile_picture:"" )
+Profile.create(user: u5, location:"New Jadon" , bio:"Voluptatum quisquam a dicta sit saepe harum nisi omnis." , profile_picture:"" )
+Profile.create(user: u6, location:"East Arno" , bio:"Nam enim voluptatem omnis fuga iste non molestiae possimus iusto." , profile_picture:"" )
+Profile.create(user: u7, location:"New Loraine" , bio:"Omnis aut et." , profile_picture:"" )
+Profile.create(user: u8, location:"Otisburgh" , bio:"Et sit hic error quod." , profile_picture:"" )
+Profile.create(user: u9, location:"Claudiemouth" , bio:"Sunt quisquam doloremque." , profile_picture:"" )
+Profile.create(user: u10, location:"Germainefort" , bio:"Ea nesciunt nemo optio corporis reiciendis eius." , profile_picture:"" )
+
