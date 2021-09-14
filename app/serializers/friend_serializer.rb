@@ -1,5 +1,5 @@
 class FriendSerializer < ActiveModel::Serializer
-  attributes :friendship_id
+  attributes :id, :name, :username, :profile, :habits
 
   def profile
     {location: self.object.profile.location,
@@ -8,17 +8,16 @@ class FriendSerializer < ActiveModel::Serializer
   end
 
   def habits
-    self.object.habits.map do |habit|
-      if habit.private == false && habit.archived == false
-        {id: habit.id,
+    self.object.habits.public_active.map do |habit|
+        {
+        id: habit.id,
         name: habit.name,
         description: habit.description,
         periodicity: habit.periodicity,
         frequency: habit.goal,
-        total_times: habit.count_times_logged,
+        total_times: habit.total_times,
         logs: habit.get_logs
         }
-      end
     end
   end
   

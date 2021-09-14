@@ -1,7 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :name, :email, :birthday, :profile
-
-  has_many :habits, each_serializer: HabitSerializer
+  attributes :id, :username, :name, :profile
 
   def profile
     {location: self.object.profile.location,
