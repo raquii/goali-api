@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
 
     def update
         profile = Profile.find(params[:id])
-        if profile.user == @current_user
+        if profile.user_id == @current_user.id
             profile.update!(profile_params)
             render json: profile
         end
