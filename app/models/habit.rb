@@ -15,7 +15,7 @@ class Habit < ApplicationRecord
   end
 
   def get_logs
-    self.logs.map do |log|
+    self.logs.order(date: :desc).map do |log|
       {date: log.date}
     end
   end
