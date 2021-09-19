@@ -2,7 +2,11 @@ class ProfilesController < ApplicationController
     
     def show
         profile = User.find_by(username:params[:username])
-        render json: profile
+        if profile.friendships.find_by(friend_id:@current_user.id) || profile.id == @current_user.id
+            render json: profile, serializer: FriendSerializer
+        else
+            render json: profile
+        end
     end 
 
     def update
