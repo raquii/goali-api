@@ -23,9 +23,10 @@ class HabitsController < ApplicationController
 
     def destroy
         habit = find_habit
+        id = habit.id
         if habit.user_id == @current_user.id
             habit.destroy
-            render json: {message: "Successfully deleted."}
+            render json: {id: id, message: "Successfully deleted."}
         end
     end
 
