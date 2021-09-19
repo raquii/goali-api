@@ -1,15 +1,22 @@
 class LogsController < ApplicationController
 
     def create
-        habit = Habit.find(id: params[:habit_id])
+        habit = Habit.find(params[:habit_id])
         log = habit.logs.create!(log_params)
         render json: habit, status: :created
     end
 
+    def update
+        log = find_log
+        log.update!(log_params)
+        render json: log
+    end
+
     def destroy
         log = find_log
+        habit = Habit.find(log.habit_id)
         log.destroy
-        head :no_content
+        render json: habit
     end
     
     private
