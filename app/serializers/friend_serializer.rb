@@ -1,11 +1,7 @@
 class FriendSerializer < ActiveModel::Serializer
-  attributes :id, :name, :username, :profile, :habits
+  attributes :id, :name, :username, :habits
 
-  def profile
-    {location: self.object.profile.location,
-      profile_picture: self.object.profile.profile_picture,
-      bio: self.object.profile.bio}
-  end
+  has_one :profile, serializer: ProfileSerializer
 
   def habits
     self.object.habits.public_active.map do |habit|
