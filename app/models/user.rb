@@ -1,8 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
 
-    scope :filter_by_name, -> (name){ where("lower(name) like ?", "#{name.downcase}%")}
-    scope :filter_by_username, -> (username){ where("username like ?", "#{username}%")}
+    scope :filter_by_query, -> (search){ where("lower(name) LIKE :query OR lower(username) LIKE :query", query: "#{search.downcase}%")}
 
     #relationship macros
     has_one :profile, dependent: :destroy

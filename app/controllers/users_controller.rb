@@ -3,8 +3,7 @@ class UsersController < ApplicationController
 
     def index
         users = User.all
-        users = users.filter_by_name(params[:name]) if params[:name].present?
-        users = users.filter_by_username(params[:username]) if params[:username].present?
+        users = users.filter_by_query(params[:search]) if params[:search].present?
         render json: users
     end
     
